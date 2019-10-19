@@ -1,0 +1,9 @@
+package com.zero.service ;
+
+import com.alibaba.fastjson.JSONObject ;
+import com.zero.entity.ResultBean ;
+
+public interface BaseService {
+	
+	public ResultBean service(JSONObject json) ;
+}

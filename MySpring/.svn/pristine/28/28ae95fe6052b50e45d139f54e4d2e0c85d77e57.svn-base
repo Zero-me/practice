@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zero.dao.UsersMapper">
+	<!-- <cache type="com.zero.redis.RedisCache" /> -->
+	<resultMap id="BaseResultMap" type="com.zero.entity.Users">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="pwd" jdbcType="VARCHAR" property="pwd" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from users
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.zero.entity.Users">
+		insert into users (id, `name`, pwd
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.zero.entity.Users">
+		update users
+		set `name` = #{name,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select id, `name`, pwd
+		from users
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, `name`, pwd
+		from users
+		where name = #{name,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, `name`, pwd
+		from users
+	</select>
+</mapper>

@@ -1,0 +1,11 @@
+{
+	"maxInvTime":10,
+	"allowList":[
+		"/user/login",
+		"/chat",
+		"/api/websocket",
+		"/favicon.ico",
+		"/up",
+		"/upload"
+		]
+}

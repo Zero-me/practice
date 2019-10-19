@@ -1,0 +1,8 @@
+{
+	"maxInvTime":10,
+	"allowList":[
+		"/user/login",
+		"/chat",
+		"/favicon.ico"
+		]
+}

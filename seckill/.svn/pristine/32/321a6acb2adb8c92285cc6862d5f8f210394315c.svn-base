@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	
+	<settings>
+	
+		<!-- 日志开启 <setting name="logImpl" value="LOGBACK"/>-->
+		<!-- <setting name="localCacheScope" value="SESSION"/> -->
+		<!-- 一级缓存的作用域是一个sqlSession中，二级缓存可以存在于多个SQLSession中 -->
+        <!-- 二级缓存开启 -->
+        <setting name="cacheEnabled" value="true"/>
+    	<setting name="lazyLoadingEnabled" value="false"/>
+       	<setting name="aggressiveLazyLoading" value="true"/>
+        
+	
+	
+		<!-- 使用jdbc的。。。生成数据库自增主键值 -->
+		<setting name="useGeneratedKeys" value="true"/>
+		
+		<!-- 使用列别名替换列名 -->
+		<setting name="useColumnLabel" value="true"/>
+		
+		<!-- 开启驼峰明明转换 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+
+</configuration>

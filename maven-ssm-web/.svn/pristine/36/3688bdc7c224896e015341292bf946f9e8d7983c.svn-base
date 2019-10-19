@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zero.dao.CorporationMapper">
+
+	 <cache type="com.zero.redis.RedisCache" />
+	 
+	<resultMap id="BaseResultMap" type="com.zero.model.Corporation">
+    <result column="corpoId" jdbcType="INTEGER" property="corpoId" />
+    <result column="corpoType" jdbcType="VARCHAR" property="corpoType" />
+    <result column="corpoName" jdbcType="VARCHAR" property="corpoName" />
+    <result column="corpoPrice" jdbcType="VARCHAR" property="corpoPrice" />
+    <result column="corpoBoss" jdbcType="VARCHAR" property="corpoBoss" />
+    <result column="corpoBoosId" jdbcType="INTEGER" property="corpoBoosId" />
+  	</resultMap>
+	
+    <!-- 查询所有Corporation -->  
+    <select id="queryAll" resultType="Corporation" >  
+        select * from Corporation  
+    </select>
+    
+    <insert id="insert" parameterType="com.zero.model.Corporation">
+    insert into Corporation (corpoId, corpoType, corpoName,corpoPrice,corpoBoss,corpoBoosId
+      )
+    values (#{corpoId,jdbcType=INTEGER}, #{corpoType,jdbcType=VARCHAR}, #{corpoName,jdbcType=VARCHAR},#{corpoPrice,jdbcType=VARCHAR},#{corpoBoss,jdbcType=VARCHAR},#{corpoBoosId,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  <sql id="Base_Column_List">
+    corpoId, corpoType, corpoName,corpoPrice,corpoBoss,corpoBoosId
+  </sql>
+  
+    <insert id="insertSelective" parameterType="com.zero.model.Corporation">
+    insert into Corporation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="corpoId != null">
+        corpoId,
+      </if>
+      <if test="corpoType != null">
+        corpoType,
+      </if>
+      <if test="corpoName != null">
+        corpoName,
+      </if>
+      <if test="corpoPrice != null">
+        corpoPrice,
+      </if>
+      <if test="corpoBoss != null">
+        corpoBoss,
+      </if>
+      <if test="corpoBoosId != null">
+        corpoBoosId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="corpoId != null">
+        #{corpoId,jdbcType=INTEGER},
+      </if>
+      <if test="corpoType != null">
+        #{corpoType,jdbcType=VARCHAR},
+      </if>
+      <if test="corpoName != null">
+        #{corpoName,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="corpoPrice != null">
+        #{corpoPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="corpoBoss != null">
+        #{corpoBoss,jdbcType=VARCHAR},
+      </if>
+      <if test="corpoBoosId != null">
+        #{corpoBoosId,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  
+  
+  <!-- corpoId, corpoType, corpoName,corpoPrice,corpoBoss,corpoBoosId -->
+  <select id="queryByWhere" resultType="Corporation">
+  	
+  	select  * from Corporation where 1 = 1 
+  	<if test="contentSize.corpoId != null and contentSize.corpoId != 0">
+  		and	corpoId=#{contentSize.corpoId}
+  	</if> 
+	
+	<if test="contentSize.corpoType != null">
+  		and corpoType=#{contentSize.corpoType}
+  	</if>
+  	
+  	<if test="contentSize.corpoName != null">
+  			and corpoName=#{contentSize.corpoName}
+  	</if>  
+  	<if test="contentSize.corpoPrice != null">
+  		and	corpoPrice=#{contentSize.corpoPrice}
+  	</if> 
+	
+	<if test="contentSize.corpoBoss != null">
+  		and corpoBoss=#{contentSize.corpoBoss}
+  	</if>
+  	
+  	<if test="contentSize.corpoBoosId != null and contentSize.corpoBoosId != 0">
+  			and corpoBoosId=#{contentSize.corpoBoosId}
+  	</if>  
+  
+  </select>
+  
+  <delete id="deleteByWhere" >
+  	
+  	delete from Corporation where 1 = 1 
+  	<if test="contentSize.corpoId != null and contentSize.corpoId != 0">
+  		and	corpoId=#{contentSize.corpoId}
+  	</if> 
+	
+	<if test="contentSize.corpoType != null">
+  		and corpoType=#{contentSize.corpoType}
+  	</if>
+  	
+  	<if test="contentSize.corpoName != null">
+  			and corpoName=#{contentSize.corpoName}
+  	</if>  
+  	<if test="contentSize.corpoPrice != null">
+  		and	corpoPrice=#{contentSize.corpoPrice}
+  	</if> 
+	
+	<if test="contentSize.corpoBoss != null">
+  		and corpoBoss=#{contentSize.corpoBoss}
+  	</if>
+  	
+  	<if test="contentSize.corpoBoosId != null and contentSize.corpoBoosId != 0">
+  			and corpoBoosId=#{contentSize.corpoBoosId}
+  	</if>  
+  
+  </delete>
+  
+  
+  <select id="queryCount" resultType="java.lang.Integer">
+  	
+  	select  count(*) from Corporation where 1 = 1 
+  	<if test="contentSize.corpoId != null and contentSize.corpoId != 0">
+  		and	corpoId=#{contentSize.corpoId}
+  	</if> 
+	
+	<if test="contentSize.corpoType != null">
+  		and corpoType=#{contentSize.corpoType}
+  	</if>
+  	
+  	<if test="contentSize.corpoName != null">
+  			and corpoName=#{contentSize.corpoName}
+  	</if>  
+  	<if test="contentSize.corpoPrice != null">
+  		and	corpoPrice=#{contentSize.corpoPrice}
+  	</if> 
+	
+	<if test="contentSize.corpoBoss != null">
+  		and corpoBoss=#{contentSize.corpoBoss}
+  	</if>
+  	
+  	<if test="contentSize.corpoBoosId != null and contentSize.corpoBoosId != 0">
+  			and corpoBoosId=#{contentSize.corpoBoosId}
+  	</if>  
+  
+  </select>
+  
+  
+  <select id="queryByWherePage" resultType="Corporation">
+  	
+  	select  * from Corporation where 1 = 1 
+  	<if test="contentSize.corpoId != null and contentSize.corpoId != 0">
+  		and	corpoId=#{contentSize.corpoId}
+  	</if> 
+	
+	<if test="contentSize.corpoType != null">
+  		and corpoType=#{contentSize.corpoType}
+  	</if>
+  	
+  	<if test="contentSize.corpoName != null">
+  			and corpoName=#{contentSize.corpoName}
+  	</if>  
+  	<if test="contentSize.corpoPrice != null">
+  		and	corpoPrice=#{contentSize.corpoPrice}
+  	</if> 
+	
+	<if test="contentSize.corpoBoss != null">
+  		and corpoBoss=#{contentSize.corpoBoss}
+  	</if>
+  	
+  	<if test="contentSize.corpoBoosId != null and contentSize.corpoBoosId != 0">
+  			and corpoBoosId=#{contentSize.corpoBoosId}
+  	</if>  
+  	
+  	<if test="currPage != null">
+  		<if test="pageSize != null">
+  			limit #{currPage},#{pageSize}
+  		</if>
+  	</if>  
+  
+  </select>
+  
+  
+  
+  
+  
+</mapper>

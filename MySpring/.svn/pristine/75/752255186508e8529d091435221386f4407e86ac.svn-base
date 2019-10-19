@@ -1,0 +1,40 @@
+package com.zero.util;
+
+import java.io.File;
+import java.util.List;
+
+import com.zero.entity.UserAuthConfig;
+
+public class ConfigUtil {
+
+	private static final ConfigUtil instance = new ConfigUtil();
+	
+	private static final String UserAuthConfigPath = "extra/userauthconfig.json";
+	
+	private static final UserAuthConfig userAuthConfig;
+	
+	private static final int maxInvTime;
+	
+	private static final List<String> allowList;
+	
+	static {
+		userAuthConfig = JsonUtil.readValue(new File(UserAuthConfigPath), UserAuthConfig.class);
+		maxInvTime = userAuthConfig.getMaxInvTime();
+		allowList = userAuthConfig.getAllowList();
+	}
+	
+	private  ConfigUtil(){
+	}
+	
+	public static ConfigUtil getInstance() {
+		return instance;
+	}
+	
+	public  int getMaxinvtime() {
+		return maxInvTime;
+	}
+
+	public  List<String> getAllowlist() {
+		return allowList;
+	}
+}

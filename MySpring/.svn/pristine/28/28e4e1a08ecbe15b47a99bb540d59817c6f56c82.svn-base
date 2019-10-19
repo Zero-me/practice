@@ -1,0 +1,32 @@
+package com.zero.entity;
+
+import lombok.Data;
+
+@Data
+public class UserBean {
+	
+		private String userName;
+		
+		private String userIp;
+		
+		private String token;
+		
+		private String OrignRequstUri;
+
+		public UserBean(String userIp, String token, String orignRequstUri) {
+			super();
+			this.userIp = userIp;
+			this.token = token;
+			OrignRequstUri = orignRequstUri;
+		}
+
+		@Override
+		public String toString() {
+			return "UserBean [userName=" + userName + ", userIp=" + userIp + ", token=" + token + ", OrignRequstUri="
+					+ OrignRequstUri + "]";
+		}
+		
+		
+		
+		
+}

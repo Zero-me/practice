@@ -1,0 +1,52 @@
+package com.zero.filter ;
+
+import java.io.IOException ;
+import javax.servlet.Filter ;
+import javax.servlet.FilterChain ;
+import javax.servlet.FilterConfig ;
+import javax.servlet.ServletException ;
+import javax.servlet.ServletRequest ;
+import javax.servlet.ServletResponse ;
+import javax.servlet.http.HttpServletRequest ;
+import javax.servlet.http.HttpServletResponse ;
+import org.apache.commons.lang3.StringUtils ;
+import org.slf4j.Logger ;
+import org.slf4j.LoggerFactory ;
+
+public class UserAuthFilter implements Filter {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+	
+	private final static String	WEBSOKET_URI = "/api/websocket" ;
+	
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		logger.info("[init] UserAuthFilter init ...") ;
+	}
+	
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request ;
+		HttpServletResponse rsp = (HttpServletResponse) response ;
+		String requestUri = req.getRequestURI() ;
+		if (requestUri.contains(WEBSOKET_URI)) {
+			String swp = req.getHeader("Sec-WebSocket-Protocol") ;
+			String [] SecWebSocketProtocol = swp.split(",") ;
+			String subProtocol = SecWebSocketProtocol[0] ;
+			String token = null ;
+			if (SecWebSocketProtocol.length > 1) {
+				token = SecWebSocketProtocol[1] ;
+				if (!StringUtils.isEmpty(token)) {
+					rsp.setHeader("Sec-WebSocket-Protocol", subProtocol) ;
+				}
+			}
+		}
+		chain.doFilter(request, rsp) ;
+	}
+	
+	@Override
+	public void destroy() {
+		logger.info("[destroy] UserAuthFilter destroy ...") ;
+	}
+	
+}

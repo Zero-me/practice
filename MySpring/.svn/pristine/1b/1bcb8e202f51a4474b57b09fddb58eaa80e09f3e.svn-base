@@ -1,0 +1,40 @@
+package com.zero.filter ;
+
+import javax.servlet.FilterConfig ;
+import javax.servlet.ServletException ;
+import org.apache.commons.lang3.StringUtils ;
+import org.slf4j.Logger ;
+import org.slf4j.LoggerFactory ;
+
+import com.zero.entity.UserBean;
+import com.zero.exception.UserAuthException;
+
+public class UserAuthFilter extends BaseSafeFilter {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+	
+	
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		logger.info("UserAuthFilter init ...") ;
+	}
+	
+	
+	@Override
+	protected void check(UserBean userBean){
+			if(userBean.getOrignRequstUri().contains("chat")) {
+				return;
+			}
+			if(StringUtils.isNotEmpty(userBean.getToken())) {
+				return;
+			}
+			logger.error("[check] token is illagel ...") ;
+			throw new UserAuthException("token is illagel");
+	}
+	
+	@Override
+	public void destroy() {
+		logger.info("UserAuthFilter destroy ...") ;
+	}
+	
+}

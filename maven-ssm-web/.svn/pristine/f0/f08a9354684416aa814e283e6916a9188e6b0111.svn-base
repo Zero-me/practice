@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zero.dao.PersonMapper">
+	<!-- 缓存类配置 -->
+    <cache type="com.zero.redis.RedisCache" />
+	
+	<resultMap id="BaseResultMap" type="com.zero.model.Person">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  	</resultMap>
+	
+    <!-- 查询所有person -->  
+    <select id="queryAll" resultType="Person" >  
+        select * from person  
+    </select>
+    
+    <insert id="insert" parameterType="com.zero.model.Person">
+    insert into person (id, name, age
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  <sql id="Base_Column_List">
+    id, name, age
+  </sql>
+  
+    <insert id="insertSelective" parameterType="com.zero.model.Person">
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="queryByWhere" resultType="Person">
+  	
+  	select  * from person where 1 = 1 
+  	<if test="contentSize.id != null and contentSize.id != 0">
+  		and	id=#{contentSize.id}
+  	</if> 
+	
+	<if test="contentSize.name != null">
+  		and name=#{contentSize.name}
+  	</if>
+  	
+  	<if test="contentSize.age != null and contentSize.age != 0">
+  			and age=#{contentSize.age}
+  	</if>  
+  
+  </select>
+  
+  <delete id="deleteByWhere" >
+  	
+  	delete from person where 1 = 1 
+  	<if test="contentSize.id != null and contentSize.id != 0">
+  		and	id=#{contentSize.id}
+  	</if> 
+	
+	<if test="contentSize.name != null">
+  		and name=#{contentSize.name}
+  	</if>
+  	
+  	<if test="contentSize.age != null and contentSize.age != 0">
+  			and age=#{contentSize.age}
+  	</if>  
+  
+  </delete>
+  
+  
+  <select id="queryCount" resultType="java.lang.Integer">
+  	
+  	select  count(*) from person where 1 = 1 
+  	<if test="contentSize.id != null and contentSize.id != 0">
+  		and	id=#{contentSize.id}
+  	</if> 
+	
+	<if test="contentSize.name != null">
+  		and name=#{contentSize.name}
+  	</if>
+  	
+  	<if test="contentSize.age != null and contentSize.age != 0">
+  			and age=#{contentSize.age}
+  	</if>  
+  
+  </select>
+  
+  
+  <select id="queryByWherePage" resultType="Person">
+  	
+  	select  * from person where 1 = 1 
+  	<if test="contentSize.id != null and contentSize.id != 0">
+  		and	id=#{contentSize.id}
+  	</if> 
+	
+	<if test="contentSize.name != null">
+  		and name=#{contentSize.name}
+  	</if>
+  	
+  	<if test="contentSize.age != null and contentSize.age != 0">
+  			and age=#{contentSize.age}
+  	</if>
+  	
+  	<if test="currPage != null">
+  		<if test="pageSize != null">
+  			limit #{currPage},#{pageSize}
+  		</if>
+  	</if>  
+  
+  </select>
+  
+  
+  <resultMap type="com.zero.model.Person" id="PersonDatail">
+  		<result column="id" jdbcType="INTEGER" property="id" />
+    	<result column="name" jdbcType="VARCHAR" property="name" />
+    	<result column="age" jdbcType="INTEGER" property="age" />
+    	<association property="Corporation" javaType="com.zero.model.Corporation">
+    		<result column="corpoType" jdbcType="VARCHAR" property="corpoType" />
+		    <result column="corpoName" jdbcType="VARCHAR" property="corpoName" />
+		    <result column="corpoPrice" jdbcType="VARCHAR" property="corpoPrice" />
+		    <result column="corpoBoss" jdbcType="VARCHAR" property="corpoBoss" />
+		    <result column="corpoBoosId" jdbcType="INTEGER" property="corpoBoosId" />
+    	</association>
+  </resultMap>
+  
+  
+  <select id="getDatailPerson" resultMap="PersonDatail">
+ 		 <!-- select * from person p,Corporation c where p.id = c.corpoBoosId -->
+  		select person.*,Corporation.*  from person left join Corporation on person.id = Corporation.corpoBoosId where 1=1
+  		<if test="contentSize.id != null and contentSize.id != 0">
+  		and	id=#{contentSize.id}
+  	</if> 
+	
+	<if test="contentSize.name != null">
+  		and name=#{contentSize.name}
+  	</if>
+  	
+  	<if test="contentSize.age != null and contentSize.age != 0">
+  			and age=#{contentSize.age}
+  	</if>
+  	
+  	<if test="currPage != null">
+  		<if test="pageSize != null">
+  			limit #{currPage},#{pageSize}
+  		</if>
+  	</if>  
+  </select>
+  
+  
+</mapper>

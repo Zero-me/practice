@@ -1,0 +1,8 @@
+user.auth.faillure=用户鉴权失败
+user.login.faillure=用户登录失败
+user.login.success=用户登录成功
+input.pwd.different=您输入的两次新密码不一致
+user.changepwd.success=用户密码修改成功
+input.prarm.empty=输入参数为空
+input.prarm.error=输入参数有误
+file.uplad.success=文件上传成功
