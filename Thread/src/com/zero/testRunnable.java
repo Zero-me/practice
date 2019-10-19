@@ -30,7 +30,6 @@ public class testRunnable implements Runnable {
             print();
         }
 	}
-	￿￿￿
 
     /**
      * 获取属性
