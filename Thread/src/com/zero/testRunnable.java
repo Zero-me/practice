@@ -17,7 +17,7 @@ public class testRunnable implements Runnable {
 	   void print(){
          System.out.println(Thread.currentThread().getName() + "-" + i);
     }
-	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
