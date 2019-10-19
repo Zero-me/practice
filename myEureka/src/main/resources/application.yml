@@ -1,0 +1,10 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false #设置为false，不用注册到其他服务器，为true则相反
+    fetch-registry: false #服务器不用去服务器抓取注册信息
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
