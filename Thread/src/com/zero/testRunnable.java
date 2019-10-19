@@ -1,11 +1,14 @@
 package com.zero;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 /**
  * 
  * 	在这种情况下，程序所创建的Runnable对象只是线程的target。而多个线程可以共享一个target
  * 	多个线程可以共享同一个线程类，即线程的target的实例对象
  * 
  * 
- * 
+ * 梵蒂冈fsfsfs
  * 
  * @author Zero-me
  *
@@ -27,7 +30,14 @@ public class testRunnable implements Runnable {
             print();
         }
 	}
-	
+	￿￿￿
+
+    /**
+     * 获取属性
+     */
+    public static void getpppp(){
+	       // TODO 防晒霜s   
+    }
 	public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
             System.out.println(Thread.currentThread().getName() + "-" + i);
