@@ -31,11 +31,13 @@ public class testRunnable implements Runnable {
         }
 	}
 
+
     /**
      * 获取属性
      */
     public static void getpppp(){
 	       // TODO 防晒霜s   
+        System.out.println("dsad打印撒asddXX");
     }
 	public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
